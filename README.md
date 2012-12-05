@@ -31,6 +31,149 @@ answers, along with a graphical demonstration of why that answer is correct. It
 is a sort of numeric playground, a field of numbers to explore.
 
 
+Implementation
+--------------
+
+HTML, Javascript, and CSS.
+
+
+Ideas
+-----
+
+See `multiplication.html` for a prototype. Below are some ASCII-art examples of
+how other operations might look and behave. All of these assume very little
+interactivity aside from moving the mouse around.
+
+Addition and subtraction
+- Numbers 1 to 10 and beyond down the left side
+- Hover over row N, and move mouse to the right to see different ways of adding
+  or subtracting numbers. Draw boxes so quantities can be visualized, and
+  color-code them for the component numbers
+
+Addition:
+
+      1
+      2
+      3
+    > 4 = [1] + [3] [_] [_]
+      5       ^
+      6
+
+      1
+      2
+      3
+    > 4 = [_] [2] + [2] [_]
+      5           ^
+      6
+
+      1
+      2
+      3
+    > 4 = [_] [_] [_] [4] + 0
+      5                   ^
+      6
+
+Subtraction:
+
+      1
+      2
+      3
+    > 4 - [1] = [3] [_] [_]
+      5       ^
+      6
+
+      1
+      2
+      3
+    > 4 - [_] [2] = [2] [_]
+      5           ^
+      6
+
+      1
+      2
+      3
+    > 4 - [_] [_] [_] [4] = 0
+      5                   ^
+      6
+
+Division:
+- Could be a variant of multiplication, but that only gives division without
+  remainders
+- How could division of whole numbers with remainders be visualized:
+
+The table approach could still be used, but the cell area would be devoted to
+showing the quotient and remainder. First, hover over a number in the left
+column (the dividend), then slide across the row to pick a divisor. The quotient
+is shown as an m x n grid of boxes, with additional boxes for any remainder:
+
+      1
+      2
+      3
+      4    v
+    > 5 / [1]
+          [_]
+          [_]
+          [_]
+          [_] = 5
+                R
+                0
+
+      1
+      2
+      3
+      4        v
+    > 5 / [_] [2]
+          [_] [_] = 2
+                    R
+              [_]   1
+
+      1
+      2
+      3
+      4            v
+    > 5 / [_] [_] [3] = 1
+                        R
+              [_] [_]   2
+
+      1
+      2
+      3
+      4                v
+    > 5 / [_] [_] [_] [4] = 1
+                            R
+                      [_]   1
+
+      1
+      2
+      3
+      4                    v
+    > 5 / [_] [_] [_] [_] [5] = 1
+                                R
+                                0
+
+      1
+      2
+      3
+      4
+      5        v
+    > 6 / [_] [2]
+          [_] [_]
+          [_] [_] = 3
+                    R
+                    0
+
+      1
+      2
+      3
+      4
+      5
+      6        v
+    > 7 / [_] [2]
+          [_] [_]
+          [_] [_] = 3
+                    R
+              [_]   1
+
 License
 -------
 
