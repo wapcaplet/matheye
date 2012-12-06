@@ -1,0 +1,44 @@
+body {
+    font-size: 1.2em;
+}
+table {
+    border: none;
+    border-spacing: 4px;
+    border-collapse: separate;
+}
+th {
+    background: #ccf;
+}
+td {
+    color: #aaa;
+}
+th, td {
+    padding: 10px;
+    text-align: center;
+    border: 1px solid black;
+}
+td:hover {
+    cursor: pointer;
+}
+.highlight {
+    background: #ff8;
+}
+.selected {
+    background: #8f8;
+    color: black;
+}
+#multiplication {
+  float: left;
+  margin-right: 2em;
+}
+#equations {
+  margin: 0.5em 0;
+  font-size: 2em;
+  font-weight: bold;
+}
+#equations ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
