@@ -40,17 +40,18 @@ HTML, Javascript, and CSS.
 Ideas
 -----
 
-See `multiplication.html` for a prototype. Below are some ASCII-art examples of
+See ``multiplication.html`` for a prototype. Below are some ASCII-art examples of
 how other operations might look and behave. All of these assume very little
 interactivity aside from moving the mouse around.
 
 Addition and subtraction
+
 - Numbers 1 to 10 and beyond down the left side
 - Hover over row N, and move mouse to the right to see different ways of adding
   or subtracting numbers. Draw boxes so quantities can be visualized, and
   color-code them for the component numbers
 
-Addition:
+Addition::
 
       1
       2
@@ -73,7 +74,7 @@ Addition:
       5                ^
       6
 
-Subtraction:
+Subtraction::
 
       1
       2
@@ -97,6 +98,7 @@ Subtraction:
       6
 
 Division:
+
 - Could be a variant of multiplication, but that only gives division without
   remainders
 - How could division of whole numbers with remainders be visualized:
@@ -104,7 +106,7 @@ Division:
 The table approach could still be used, but the cell area would be devoted to
 showing the quotient and remainder. First, hover over a number in the left
 column (the dividend), then slide across the row to pick a divisor. The quotient
-is shown as an m x n grid of boxes, with additional boxes for any remainder:
+is shown as an m x n grid of boxes, with additional boxes for any remainder::
 
       1
       2
@@ -177,5 +179,7 @@ is shown as an m x n grid of boxes, with additional boxes for any remainder:
 License
 -------
 
-MIT License.
+`MIT License`_.
+
+.. _MIT License: http://opensource.org/licenses/MIT
 
