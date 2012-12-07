@@ -32,18 +32,15 @@ function remove_highlights() {
 }
 
 // Make a cell for the product of 'a' and 'b'
-function make_cell(a, b) {
-  var td = $('<td/>');
-  td.attr({
+function multiplication_cell(a, b) {
+  var td = elem('td').html(a*b).addClass('product').attr({
     'data-a': a,
     'data-b': b
-  });
-  td.addClass('product');
-  td.html(a*b);
+  })
   // Display highlights and equation when the cell is hovered
   td.hover(function() {
     apply_highlights(a, b);
-    update_equations($(this).data('a'), $(this).data('b'));
+    update_multiplication_equations($(this).data('a'), $(this).data('b'));
     $(this).addClass('selected');
   }, function() {
     remove_highlights();
@@ -54,33 +51,27 @@ function make_cell(a, b) {
 }
 
 // Make and return a header row for the 'b' factors
-function make_header_row() {
-  var tr = $('<tr/>');
-  tr.append('<th/>');
+function multiplication_header_row() {
+  var tr = elem('tr')
+    .append(elem('th'));
   for (var b=1; b<=10; b++) {
-    var th = $('<th/>');
-    th.html(b);
-    th.attr('data-b', b);
-    th.addClass('factor');
+    var th = elem('th').html(b).attr('data-b', b).addClass('factor');
     tr.append(th);
   }
   return tr;
 }
 
 // Build and return a multiplication table
-function make_table() {
-  var table = $('<table/>');
-  var tr = make_header_row();
+function multiplication_table() {
+  var table = elem('table');
+  var tr = multiplication_header_row();
   table.append(tr);
   for (var a=1; a<=10; a++) {
-    var row = $('<tr/>');
-    var th = $('<th/>');
-    th.html(a);
-    th.attr('data-a', a);
-    th.addClass('factor');
+    var row = elem('tr');
+    var th = elem('th').html(a).attr('data-a', a).addClass('factor');
     row.append(th);
     for (var b=1; b<=10; b++) {
-      var td = make_cell(a, b);
+      var td = multiplication_cell(a, b);
       row.append(td);
     }
     table.append(row);
@@ -89,21 +80,17 @@ function make_table() {
 }
 
 // Update the equation to show the product of 'a' and 'b'
-function update_equations(a, b) {
-  var ul = $('<ul/>');
-  ul.append('<li>' + a + ' &times; ' + b + ' = ' + a*b + '<\/li>');
-  ul.append('<li>' + b + ' &times; ' + a + ' = ' + a*b + '<\/li>');
+function update_multiplication_equations(a, b) {
+  var ul = elem('ul')
+    .append(li(a + ' &times; ' + b + ' = ' + a*b))
+    .append(li(b + ' &times; ' + a + ' = ' + a*b));
 
   clear_equations();
   $('#equations').append(ul);
 }
 
-function clear_equations() {
-  $('#equations').empty();
-}
-
 $(document).ready(function() {
-  table = make_table();
+  table = multiplication_table();
   $('div#multiplication').html(table);
 });
 

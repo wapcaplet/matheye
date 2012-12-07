@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block title %}Add{% endblock %}
+
+{% block content %}
+  <div id="addition"></div>
+
+  <script src="{{ url_for('static', filename='js/addition.js') }}"></script>
+  <script>
+    $(document).ready(function() {
+      $('#addition').html(show_subtraction(7, 3));
+    });
+  </script>
+{% endblock %}
+

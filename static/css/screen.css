@@ -42,3 +42,27 @@ td:hover {
   padding: 0;
 }
 
+.box {
+  border: 1px solid black;
+  background: #aaf;
+  width: 24px;
+  height: 24px;
+  margin: 2px;
+  padding: 4px;
+  display: inline-block;
+  text-align: center;
+}
+
+.operator {
+  border: none;
+  background: transparent;
+}
+
+.number {
+}
+
+.subtract {
+  border: 1px solid #888;;
+  background: #ccc;
+}
+
