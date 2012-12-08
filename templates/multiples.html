@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block title %}Multiply{% endblock %}
+
+{% block content %}
+  <div id="multiples"></div>
+  <div id="buttons"></div>
+
+  <script src="{{ url_for('static', filename='js/multiples.js') }}"></script>
+{% endblock %}
+

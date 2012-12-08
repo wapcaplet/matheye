@@ -14,12 +14,15 @@ function li(content) {
 // Draw a box using a span
 function box(content, cls) {
   if (!content) { content = '&nbsp;'; }
-  cls = cls + ' box';
+  if (!cls) { cls = 'box'; }
+  else { cls = cls + ' box'; }
   return $('<span class="' + cls + '"/>').html(content);
 }
 
 function number_box(number, cls) {
-  return box(number, 'number ' + cls);
+  if (!cls) { cls = 'number'; }
+  else { cls = cls + ' number'; }
+  return box(number, cls);
 }
 
 function operator_box(operator) {
@@ -45,3 +48,35 @@ function divide_box() {
 function equals_box() {
   return operator_box('=');
 }
+
+// Return a string of classes for the given number, including
+// 'even', 'odd', or 'prime'
+function number_classes(number) {
+  var classes = '';
+  if (number % 2 == 0) {
+    classes = 'even';
+  }
+  else {
+    classes = 'odd';
+  }
+  if (is_prime(number)) {
+    classes += ' prime';
+  }
+  return classes;
+}
+
+// Quick-and-dirty prime detector
+function is_prime(n)
+{
+  if (n < 2) { return false; }
+  var q = Math.sqrt(n);
+  for (var i = 2; i <= q; i++)
+  {
+    if (n % i == 0)
+    {
+      return false;
+    }
+  }
+  return true;
+}
+

@@ -22,7 +22,7 @@ Or subtraction:
 function show_sum(add_or_subtract, sum, term) {
   var block = $('<div/>');
 
-  block.append(number_box(sum));
+  block.append(box(sum));
 
   // Boxes for the term, with number in the last box
   for (var t=1; t<term; t++) {
@@ -31,24 +31,23 @@ function show_sum(add_or_subtract, sum, term) {
 
   // '=' or '-'
   if (add_or_subtract == 'add') {
-    block.append(number_box('=&nbsp;' + term));
+    block.append(number_box('=&nbsp;' + term, add_or_subtract));
   }
   else {
-    block.append(number_box('-&nbsp;' + term, 'subtract'));
+    block.append(number_box('&minus;&nbsp;' + term, add_or_subtract));
   }
 
-  // Boxes for the result, with number in the last box
+  // Boxes for the result, with number in the first box
   var result = sum - term;
-  for (var t=1; t<result; t++) {
-    block.append(box());
-  }
-
   // '+' or '='
   if (add_or_subtract == 'add') {
-    block.append(number_box('+&nbsp;' + result));
+    block.append(number_box('&plus;&nbsp;' + result));
   }
   else {
     block.append(number_box('=&nbsp;' + result));
+  }
+  for (var t=1; t<result; t++) {
+    block.append(number_box());
   }
 
   return block;

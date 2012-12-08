@@ -15,6 +15,10 @@ def addition():
 def multiply():
     return render_template('multiply.html')
 
+@app.route('/multiples')
+def multiples():
+    return render_template('multiples.html')
+
 if __name__ == '__main__':
     app.debug = True
     app.run()

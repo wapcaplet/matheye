@@ -2,12 +2,25 @@
 {% block title %}Add{% endblock %}
 
 {% block content %}
+  <p>Work in progress...</p>
   <div id="addition"></div>
 
   <script src="{{ url_for('static', filename='js/addition.js') }}"></script>
   <script>
     $(document).ready(function() {
-      $('#addition').html(show_subtraction(7, 3));
+      $('#addition').append(show_subtraction(7, 1));
+      $('#addition').append(show_subtraction(7, 2));
+      $('#addition').append(show_subtraction(7, 3));
+      $('#addition').append(show_subtraction(7, 4));
+      $('#addition').append(show_subtraction(7, 5));
+      $('#addition').append(show_subtraction(7, 6));
+
+      $('#addition').append(show_addition(7, 1));
+      $('#addition').append(show_addition(7, 2));
+      $('#addition').append(show_addition(7, 3));
+      $('#addition').append(show_addition(7, 4));
+      $('#addition').append(show_addition(7, 5));
+      $('#addition').append(show_addition(7, 6));
     });
   </script>
 {% endblock %}
