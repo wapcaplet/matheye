@@ -25,10 +25,15 @@ their symbolic representation, giving the child an immediate connection between
 Goals
 -----
 
-Matheye in a way aims to present interactive cheat-sheets of basic mathematics.
-It doesn't prompt the user for correct answers; what it does is show all of the
-answers, along with a graphical demonstration of why that answer is correct. It
-is a sort of numeric playground, a field of numbers to explore.
+Matheye in a way aims to present interactive cheat-sheets of basic mathematics,
+targeted toward children or beginners who are learning math concepts for the
+first time. It doesn't prompt for answers or do grading of any kind; it's simply
+a tool for explanation and exploration.
+
+Short-term, it will include fundamental concepts with whole numbers: addition,
+subtraction, multiplication, division with remainders, prime numbers, factors,
+and multiples. Longer-term, it might expand to include fractions, functions,
+trigonometry, algebra, and calculus.
 
 
 Implementation
@@ -39,10 +44,6 @@ HTML, Javascript, and CSS.
 
 Ideas
 -----
-
-See ``multiplication.html`` for a prototype. Below are some ASCII-art examples of
-how other operations might look and behave. All of these assume very little
-interactivity aside from moving the mouse around.
 
 Addition and subtraction
 
@@ -98,10 +99,6 @@ Subtraction::
       6
 
 Division:
-
-- Could be a variant of multiplication, but that only gives division without
-  remainders
-- How could division of whole numbers with remainders be visualized:
 
 The table approach could still be used, but the cell area would be devoted to
 showing the quotient and remainder. First, hover over a number in the left
@@ -175,6 +172,36 @@ is shown as an m x n grid of boxes, with additional boxes for any remainder::
           [_] [_] = 3
                     R
               [_]   1
+
+Future ideas
+------------
+
+- Square roots: Show a number with its square root in grid form. When N is 9, then
+  the grid is 3x3. When N is not a perfect square, the grid shows fractional
+  squares to illustrate the concept of filling the grid with N squares.
+
+- Fractions: Show a number line, and a fraction with draggable numerator and
+  denominator. Changing the denominator causes tick marks to be shown at those
+  intervals; changing the numerator shows filled blocks between the tick marks::
+
+    0           1           2
+    |xxx|xxx|   |   |   |   |  ...    ** 2 / 3 **
+
+    0           1           2
+    |xx|xx|xx|  |  |  |  |  |  ...    ** 3 / 4 **
+
+    0           1           2
+    |xx|xx|xx|xx|xx|  |  |  |  ...    ** 5 / 4 **
+
+- Realtime function graphing: Show an x/y plot, with equations that can be
+  modified tangle-style, showing the results immediately on the plot. Include a
+  selection of interesting functions (straight lines, ellipse, parabola,
+  hyperbola, sine/cosine, etc.)
+
+- Trigonometry: Interactive triangle with angles labeled, direct visualization
+  of sin/cos/tan functions. Corners of triangle can be dragged to change its
+  shape; the length of sides can be dragged to change the length of one side.
+
 
 License
 -------
