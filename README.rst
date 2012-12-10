@@ -42,6 +42,29 @@ Implementation
 HTML, Javascript, and CSS.
 
 
+Install and run
+---------------
+
+Get the source using git::
+
+    $ git clone git://github.com/wapcaplet/matheye.git
+
+Install virtualenv_ (good) or virtualenvwrapper_ (better). Then install the
+prerequisites::
+
+    $ pip install -r requirements.txt
+
+If that works, you should now be able to do::
+
+    $ python app.py
+
+Then load http://localhost:5000/ in your browser.
+
+.. _virtualenv: http://www.virtualenv.org/en/latest/
+.. _virtualenvwrapper: http://www.doughellmann.com/projects/virtualenvwrapper/
+
+
+
 Ideas
 -----
 
