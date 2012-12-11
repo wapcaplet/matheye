@@ -1,7 +1,9 @@
 matheye
 =======
 
-Learn math concepts and operations visually.
+Learn math concepts and operations visually. Check out the `live demo`_.
+
+.. _live demo: http://matheye.herokuapp.com
 
 
 Motivation
