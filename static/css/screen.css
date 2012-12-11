@@ -102,3 +102,7 @@ td:hover {
   background: #9e9;
 }
 
+#footer {
+  clear: both;
+}
+
