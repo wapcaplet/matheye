@@ -38,15 +38,18 @@ function multiplication_cell(a, b) {
     'data-b': b
   })
   // Display highlights and equation when the cell is hovered
-  td.hover(function() {
-    apply_highlights(a, b);
-    update_multiplication_equations($(this).data('a'), $(this).data('b'));
-    $(this).addClass('selected');
-  }, function() {
-    remove_highlights();
-    clear_equations();
-    $('#equation').html('');
-  });
+  td.hover(
+    function() {
+      apply_highlights(a, b);
+      update_multiplication_equations($(this).data('a'), $(this).data('b'));
+      $(this).addClass('selected');
+    },
+    function() {
+      remove_highlights();
+      clear_equations();
+      $('#equation').html('');
+    }
+  );
   return td;
 }
 

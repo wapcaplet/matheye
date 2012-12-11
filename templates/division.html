@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block title %}Division{% endblock %}
+
+{% block content %}
+  <p>Work in progress...</p>
+  <div id="division"></div>
+
+  <script src="{{ url_for('static', filename='js/division.js') }}"></script>
+  <script>
+    $(document).ready(function() {
+      $('#division').append(show_division(9, 4));
+      $('#division').append(show_division(13, 5));
+      $('#division').append(show_division(17, 3));
+    });
+  </script>
+{% endblock %}
+

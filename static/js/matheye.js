@@ -49,6 +49,21 @@ function equals_box() {
   return operator_box('=');
 }
 
+// Append `count` cells to a table row `tr`. Optionally set the content of the
+// first and/or last cells, and the class to be applied to all cells.
+function append_cells(tr, count, first_content, last_content, cls) {
+  if (!first_content) { first_content = ''; }
+  if (!last_content) { last_content = ''; }
+  if (!cls) { cls = ''; }
+
+  for (var c = 1; c <= count; c++) {
+    var td = elem('td').addClass(cls);
+    if (c == 1)     { td.html(first_content); }
+    if (c == count) { td.html(last_content); }
+    tr.append(td);
+  }
+}
+
 // Return a string of classes for the given number, including
 // 'even', 'odd', or 'prime'
 function number_classes(number) {

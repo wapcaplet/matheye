@@ -16,12 +16,16 @@ def addition():
 def multiply():
     return render_template('multiply.html')
 
+@app.route('/division')
+def division():
+    return render_template('division.html')
+
 @app.route('/multiples')
 def multiples():
     return render_template('multiples.html')
 
 if __name__ == '__main__':
     port = int(os.environ.get('PORT', 5000))
-    #app.debug = True
+    app.debug = True
     app.run(host='0.0.0.0', port=port)
 
