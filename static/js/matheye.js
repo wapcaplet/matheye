@@ -95,3 +95,16 @@ function is_prime(n)
   return true;
 }
 
+// Return a block element containing N boxes of the given class,
+// each filled with the given content.
+function boxes(n, content, cls) {
+  if (!content) { content = ''; }
+
+  var div = elem('div').addClass('boxes');
+  for (var i = 1; i <= n; i++) {
+    div.append(box(content, cls));
+  }
+
+  return div;
+}
+

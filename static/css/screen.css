@@ -83,3 +83,22 @@ td:hover {
   background: #ff9;
   padding: 3px 5px;
 }
+
+.boxes {
+  display: inline-block;
+}
+.ones, .tens, .hundreds {
+  font-size: 0.7em;
+}
+.ones {
+  background: #fff;
+}
+
+.tens {
+  background: #ee9;
+}
+
+.hundreds {
+  background: #9e9;
+}
+

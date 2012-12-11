@@ -3,7 +3,32 @@
 
 {% block content %}
   <p>Work in progress...</p>
+  <p>Visualize simple addition and subtraction (up to 10) using a row of boxes.
+  These would be interactive; mousing to the left and right would add/subtract
+  different values, showing that there are several different ways to add two
+  numbers to get the same sum.
   <div id="addition"></div>
+
+  <p>Here's one possible way to visualize addition of multi-digit numbers. Continuing
+  with the box theme, separate columns could be shown for the hundreds, tens, ones etc.
+  They can be color-coded to indicate that the boxes have different values.
+  </p>
+  <div id="box_addition"></div>
+  <p>Provide a key and/or an interactive mechanism for combining boxes. For example:
+  </p>
+  <div id="box_key"></div>
+  <p>Allow the student to combine 10 "ones" boxes into a single "tens" box, and
+  ten "tens" boxes into a single "hundreds" box, thus visualizing how larger
+  numbers are added together with carrying. The reverse operation (splitting a
+  100 into 10 "tens", or a 10 into 10 "ones") represents "borrowing" when
+  doing subtraction.
+  </p>
+  <p>One cool thing about this approach is that the boxes don't have to be
+  arranged a certain way; they can be all mixed/moved around without changing
+  the total value represented. You can add many numbers together by just adding
+  all their hundreds/tens/ones boxes to one big pile, and combining them
+  together to get the sum.
+  </p>
 
   <script src="{{ url_for('static', filename='js/addition.js') }}"></script>
   <script>
@@ -21,6 +46,20 @@
       $('#addition').append(show_addition(7, 4));
       $('#addition').append(show_addition(7, 5));
       $('#addition').append(show_addition(7, 6));
+
+      $('#box_addition').append(box_addition(327, 418));
+
+      var hundreds_to_tens = elem('p');
+      hundreds_to_tens.append(box('100', 'hundreds'));
+      hundreds_to_tens.append(" = ");
+      hundreds_to_tens.append(boxes(10, '10', 'tens'));
+      $('#box_key').append(hundreds_to_tens);
+
+      var tens_to_ones = elem('p');
+      tens_to_ones.append(box('10', 'tens'));
+      tens_to_ones.append(" = ");
+      tens_to_ones.append(boxes(10, '1', 'ones'));
+      $('#box_key').append(tens_to_ones);
     });
   </script>
 {% endblock %}

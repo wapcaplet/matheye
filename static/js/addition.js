@@ -63,3 +63,27 @@ function show_subtraction(sum, term) {
   return show_sum('subtract', sum, term);
 }
 
+// Illustrate addition (especially of multi-digit numbers) using
+// color-coded boxes
+function box_addition(a, b) {
+  var table = elem('table')
+  table.append(box_addition_row(a));
+  table.append(box_addition_row(b));
+  return table;
+}
+
+// Return a table row with cells for the hundreds, tens, and ones places.
+// Each cell contains the number of boxes for that digit.
+// FIXME: Generalize for numbers of any size (within reason)
+function box_addition_row(num) {
+  var ones = num % 10;
+  var tens = Math.floor(num/10) % 10;
+  var hundreds = Math.floor(num/100) % 10;
+  var tr = elem('tr');
+  tr.append(elem('th').html(num));
+  tr.append(elem('td').html(boxes(hundreds, '100', 'hundreds')));
+  tr.append(elem('td').html(boxes(tens, '10', 'tens')));
+  tr.append(elem('td').html(boxes(ones, '1', 'ones')));
+  return tr;
+}
+
