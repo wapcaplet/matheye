@@ -1,31 +1,32 @@
 body {
-    font-size: 1.2em;
+  font-size: 1.2em;
 }
 table {
-    border: none;
-    border-spacing: 4px;
-    border-collapse: separate;
+  border: none;
+  border-spacing: 4px;
+  border-collapse: separate;
 }
 th {
-    background: #ccf;
+  background: #ccf;
 }
 #multiplication td {
-    color: #aaa;
+  color: #aaa;
 }
 th, td {
-    padding: 10px;
-    text-align: center;
-    border: 1px solid black;
+  padding: 10px;
+  text-align: center;
+  border: 1px solid black;
 }
 td:hover {
-    cursor: pointer;
+  cursor: pointer;
 }
 .highlight {
-    background: #ff8;
+  background: #ff8;
 }
 .selected {
-    background: #8f8;
-    color: black;
+  background: #8f8;
+  color: black !important;
+  font-weight: bold;
 }
 /* TODO: Make these divs more generic */
 #multiplication,
