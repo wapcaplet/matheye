@@ -227,6 +227,28 @@ Future ideas
   of sin/cos/tan functions. Corners of triangle can be dragged to change its
   shape; the length of sides can be dragged to change the length of one side.
 
+- Scrubbing-calculator-style solving of algebraic equations. For each variable,
+  allow the user to slide their value up and down, to immediately see how it
+  gets closer or further from a solution. Example::
+
+    x = ?
+    5*x = 35        Hover 'x' or '?' and drag. Start x at some default like 0.
+
+    x = 0           Indicate current value of x
+    5*0 = 0         Show evaluated equation; color-code red if it's no good
+        < 35        Show relationship to target value
+
+    x = 6
+    5*6 = 30
+        < 35
+
+    x = 8
+    5*8 = 40
+        > 35        Too far!
+
+    x = 7
+    5*7 = 35        Color-code green and/or make bold when a solution is found
+
 
 License
 -------
