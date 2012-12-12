@@ -221,7 +221,7 @@ Future ideas
 - Realtime function graphing: Show an x/y plot, with equations that can be
   modified tangle-style, showing the results immediately on the plot. Include a
   selection of interesting functions (straight lines, ellipse, parabola,
-  hyperbola, sine/cosine, etc.)
+  hyperbola, sine/cosine, quadratic equation etc.)
 
 - Trigonometry: Interactive triangle with angles labeled, direct visualization
   of sin/cos/tan functions. Corners of triangle can be dragged to change its
