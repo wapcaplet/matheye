@@ -3,25 +3,27 @@
 // - Current 'a' and 'b' factor headings
 // - All inner cells for factors <= a, <= b
 function apply_highlights(a, b) {
-  // Highlight the factor headings
-  $('th.factor').each(function() {
-    if ($(this).data('a') == a || $(this).data('b') == b) {
-      $(this).addClass('selected');
-    }
-    else {
-      $(this).removeClass('selected');
-    }
-  });
-  // Highlight the inner cells
-  $('td.product').each(function() {
-    $(this).removeClass('selected');
-    if ($(this).data('a') <= a && $(this).data('b') <= b) {
-      $(this).addClass('highlight');
-    }
-    else {
-      $(this).removeClass('highlight');
-    }
-  })
+  // Remove existing highlights on factors and products
+  $('th.factor')
+    .removeClass('selected');
+  $('td.product')
+    .removeClass('selected')
+    .removeClass('highlight');
+
+  // Highlight the new factor headings
+  $('th.factor[data-a=' + a + ']').addClass('selected');
+  $('th.factor[data-b=' + b + ']').addClass('selected');
+
+  // Show the current product as selected
+  $('td.product')
+    .filter('[data-a=' + a + ']')
+    .filter('[data-b=' + b + ']')
+    .addClass('selected');
+
+  // Highlight all cells in an a x b grid up to this product
+  $('td.product').filter(function() {
+    return $(this).data('a') <= a && $(this).data('b') <= b
+  }).addClass('highlight');
 }
 
 // Remove all highlights
@@ -42,12 +44,10 @@ function multiplication_cell(a, b) {
     function() {
       apply_highlights(a, b);
       update_multiplication_equations($(this).data('a'), $(this).data('b'));
-      $(this).addClass('selected');
     },
     function() {
       remove_highlights();
       clear_equations();
-      $('#equation').html('');
     }
   );
   return td;
