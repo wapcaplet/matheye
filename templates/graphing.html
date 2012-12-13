@@ -1,0 +1,83 @@
+{% extends "base.html" %}
+{% block title %}Graphing{% endblock %}
+
+{% block content %}
+  <div id="quadratic">
+    <p>This is a simple example of a realtime graphing calculator, using
+    <a href="http://worrydream.com/Tangle/">Tangle</a> to adjust a parameter for a
+    <a href="http://www.flotcharts.org/">Flot</a> graph.
+    </p>
+
+    <p>The graph shows a plot of
+    <span data-var="a" class="TKAdjustableNumber" data-min="-2.0" data-max="2.0" data-step="0.01" data-format="%.2f">&middot;</span><em>x</em><sup>2</sup>.
+    Click and drag to change the formula.
+    </p>
+
+  </div>
+  <div id="flot" style="width:400px; height:400px;"></div>
+
+  <p>A more interesting example would be a graph of a quadratic equation,
+  in which the <em>a</em>, <em>b</em>, and <em>c</em> coefficients could each
+  be adjusted in this way. The inclusion of separate visualizations for the
+  <em>b</em> (linear slope) and <em>c</em> (y-offset) values would be nice too.
+  </p>
+
+  <p>In the most general example, an arbitrary <em>f(x)</em> function could be entered, then
+  each of its numeric constants could be adjusted to see their effect on the plot.
+  Most online graphing-calculator examples I've seen require (at minimum) that
+  you press Enter or click a button to redraw the graph. This would seem to be
+  a huge improvement over those.
+  </p>
+
+  <script src="{{ url_for('static', filename='js/flot/jquery.flot.js') }}"></script>
+  <script>
+    /* Note: This example is quickly hacked together as a proof of concept;
+    all of this could be done in a more generic and flexible way.
+    */
+
+    function setUpTangle() {
+      var element = document.getElementById("quadratic");
+      var tangle = new Tangle(element, {
+        initialize: function() {
+          this.a = 0.5;
+        },
+        update: function() {
+          replot(this.a);
+        }
+      });
+    }
+
+    // Return an array of [x, y] data points, with x varying across
+    // [minimum, maximum], and each y value multiplied by the given
+    // `a` coefficient
+    function x_squared(a, minimum, maximum) {
+      var points = new Array();
+      for (var x = minimum*4; x<= maximum*4; x += 1) {
+        points.push([x*0.25, a*x*x*0.125]);
+      }
+      return points
+    }
+
+    // Redraw the graph. This could probably done more efficiently.
+    function replot(a) {
+      var data = x_squared(a, -10, 10);
+      $.plot($("#flot"), [ data ], {
+        yaxis: { min: -10, max: 10 },
+        xaxis: { min: -10, max: 10 }
+      });
+    }
+
+    $(document).ready(function() {
+      replot();
+      setUpTangle();
+    });
+  </script>
+
+  <link rel="stylesheet" href="{{ url_for('static', filename='js/tangle/TangleKit/TangleKit.css') }}" type="text/css">
+  <script type="text/javascript" src="{{ url_for('static', filename='js/tangle/Tangle.js') }}"></script>
+  <script type="text/javascript" src="{{ url_for('static', filename='js/tangle/TangleKit/mootools.js') }}"></script>
+  <script type="text/javascript" src="{{ url_for('static', filename='js/tangle/TangleKit/sprintf.js') }}"></script>
+  <script type="text/javascript" src="{{ url_for('static', filename='js/tangle/TangleKit/BVTouchable.js') }}"></script>
+  <script type="text/javascript" src="{{ url_for('static', filename='js/tangle/TangleKit/TangleKit.js') }}"></script>
+{% endblock %}
+

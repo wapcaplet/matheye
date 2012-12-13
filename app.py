@@ -24,6 +24,10 @@ def division():
 def multiples():
     return render_template('multiples.html')
 
+@app.route('/graphing')
+def graphing():
+    return render_template('graphing.html')
+
 if __name__ == '__main__':
     port = int(os.environ.get('PORT', 5000))
     app.debug = True
