@@ -8,19 +8,27 @@
     <a href="http://www.flotcharts.org/">Flot</a> graph.
     </p>
 
-    <p>The graph shows a plot of
-    <span data-var="a" class="TKAdjustableNumber" data-min="-2.0" data-max="2.0" data-step="0.01" data-format="%.2f">&middot;</span><em>x</em><sup>2</sup>.
+    <p>The graph shows a plot of the quadratic equation
+    <span data-var="a" class="TKAdjustableNumber" data-min="-2.0" data-max="2.0" data-step="0.01" data-format="%.2f"></span><em>x</em><sup>2</sup> +
+    <span data-var="b" class="TKAdjustableNumber" data-min="-3.0" data-max="3.0" data-step="0.1" data-format="%.1f"></span><em>x</em> +
+    <span data-var="c" class="TKAdjustableNumber" data-min="-10.0" data-max="10.0" data-step="0.1" data-format="%.1f"></span>.
     Click and drag to change the formula.
     </p>
+    <ul>
+      <li>Range (<em>x</em>):
+      <span data-var="xmin" class="TKAdjustableNumber" data-min="-50" data-max="0" data-step="1">&nbsp;</span>
+      to
+      <span data-var="xmax" class="TKAdjustableNumber" data-min="0" data-max="50" data-step="1">&nbsp;</span>
+      </li>
+      <li>Domain(<em>y</em>):
+      <span data-var="ymin" class="TKAdjustableNumber" data-min="-50" data-max="0" data-step="1">&nbsp;</span>
+      to
+      <span data-var="ymax" class="TKAdjustableNumber" data-min="0" data-max="50" data-step="1">&nbsp;</span>
+      </li>
+    </ul>
 
   </div>
   <div id="flot" style="width:400px; height:400px;"></div>
-
-  <p>A more interesting example would be a graph of a quadratic equation,
-  in which the <em>a</em>, <em>b</em>, and <em>c</em> coefficients could each
-  be adjusted in this way. The inclusion of separate visualizations for the
-  <em>b</em> (linear slope) and <em>c</em> (y-offset) values would be nice too.
-  </p>
 
   <p>In the most general example, an arbitrary <em>f(x)</em> function could be entered, then
   each of its numeric constants could be adjusted to see their effect on the plot.
@@ -39,36 +47,59 @@
       var element = document.getElementById("quadratic");
       var tangle = new Tangle(element, {
         initialize: function() {
-          this.a = 0.5;
+          this.a = 0.2;
+          this.b = -2;
+          this.c = -5;
+          this.xmin = -20;
+          this.xmax = 20;
+          this.ymin = -20;
+          this.ymax = 20;
         },
         update: function() {
-          replot(this.a);
+          replot(this.a, this.b, this.c, this.xmin, this.xmax, this.ymin, this.ymax);
         }
       });
     }
 
-    // Return an array of [x, y] data points, with x varying across
-    // [minimum, maximum], and each y value multiplied by the given
-    // `a` coefficient
-    function x_squared(a, minimum, maximum) {
+    // Return points for a curve ax^2 + bx + c
+    function ax2_bx1_cx0(a, b, c, xmin, xmax) {
       var points = new Array();
-      for (var x = minimum*4; x<= maximum*4; x += 1) {
-        points.push([x*0.25, a*x*x*0.125]);
+      for (var x = xmin*4; x<= xmax*4; x += 1) {
+        var xs = x*0.25; // Scaled down
+        points.push([xs, a*xs*xs + b*xs + c]);
       }
       return points
     }
 
+    // Return points for a line with slope b
+    function bx1_cx0(b, c, xmin, xmax) {
+      var points = new Array();
+      points.push([xmin, b*xmin + c]);
+      points.push([xmax, b*xmax + c]);
+      return points
+    }
+
+    // Return points describing a horizontal line at y=c
+    function cx0(c, xmin, xmax) {
+      var points = new Array();
+      points.push([xmin, c]);
+      points.push([xmax, c]);
+      return points;
+    }
+
     // Redraw the graph. This could probably done more efficiently.
-    function replot(a) {
-      var data = x_squared(a, -10, 10);
-      $.plot($("#flot"), [ data ], {
-        yaxis: { min: -10, max: 10 },
-        xaxis: { min: -10, max: 10 }
+    function replot(a, b, c, xmin, xmax, ymin, ymax) {
+      $.plot($("#flot"), [
+        cx0(c, xmin, xmax),
+        bx1_cx0(b, c, xmin, xmax),
+        ax2_bx1_cx0(a, b, c, xmin, xmax)
+      ], {
+        xaxis: { min: xmin, max: xmax},
+        yaxis: { min: ymin, max: ymax}
       });
     }
 
     $(document).ready(function() {
-      replot();
       setUpTangle();
     });
   </script>
