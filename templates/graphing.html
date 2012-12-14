@@ -9,22 +9,14 @@
     </p>
 
     <p>The graph shows a plot of the quadratic equation
-    <span data-var="a" class="TKAdjustableNumber" data-min="-2.0" data-max="2.0" data-step="0.01" data-format="%.2f"></span><em>x</em><sup>2</sup> +
-    <span data-var="b" class="TKAdjustableNumber" data-min="-5.0" data-max="5.0" data-step="0.1" data-format="%.1f"></span><em>x</em> +
-    <span data-var="c" class="TKAdjustableNumber" data-min="-10.0" data-max="10.0" data-step="0.1" data-format="%.1f"></span>.
+    <span id="a"></span><em>x</em><sup>2</sup> +
+    <span id="b"></span><em>x</em> +
+    <span id="c"></span>.
     Click and drag to change the formula.
     </p>
     <ul>
-      <li>Range (<em>x</em>):
-      <span data-var="xmin" class="TKAdjustableNumber" data-min="-50" data-max="0" data-step="1">&nbsp;</span>
-      to
-      <span data-var="xmax" class="TKAdjustableNumber" data-min="0" data-max="50" data-step="1">&nbsp;</span>
-      </li>
-      <li>Domain(<em>y</em>):
-      <span data-var="ymin" class="TKAdjustableNumber" data-min="-50" data-max="0" data-step="1">&nbsp;</span>
-      to
-      <span data-var="ymax" class="TKAdjustableNumber" data-min="0" data-max="50" data-step="1">&nbsp;</span>
-      </li>
+      <li>Range (<em>x</em>): <span id="xmin"></span> to <span id="xmax"></span></li>
+      <li>Domain (<em>y</em>): <span id="ymin"></span> to <span id="ymax"></span></li>
     </ul>
 
   </div>
@@ -43,15 +35,42 @@
     all of this could be done in a more generic and flexible way.
     */
 
+    // Initialize a tangle variable from an element with the given id.
+    function make_variable(id, min, max, step, format) {
+      var elem = $('#' + id);
+      elem.attr({
+        'class': 'TKAdjustableNumber',
+        'data-var': id,
+        'data-min': min,
+        'data-max': max
+      });
+      if (step) { elem.attr('data-step', step); }
+      if (format) { elem.attr('data-format', format); }
+    }
+
+    // Set up all variables used in the tangle
+    // TODO: Would be nice to set initial value here too
+    function setup_variables() {
+      make_variable('a', -2.0, 2.0, 0.01, '%.2f');
+      make_variable('b', -5.0, 5.0, 0.10, '%.1f');
+      make_variable('c', -10.0, 10.0, 0.10, '%.1f');
+      make_variable('xmin', -50, 0, 1);
+      make_variable('xmax', 0, 50, 1);
+      make_variable('ymin', -50, 0, 1);
+      make_variable('ymax', 0, 50, 1);
+    }
+
     function setUpTangle() {
+      setup_variables();
+
       var element = document.getElementById("quadratic");
       var tangle = new Tangle(element, {
         initialize: function() {
           this.a = 0.2;
-          this.b = -2;
+          this.b = 1.0;
           this.c = -5;
           this.xmin = -20;
-          this.xmax = 20;
+          this.xmax = 30;
           this.ymin = -20;
           this.ymax = 20;
         },
