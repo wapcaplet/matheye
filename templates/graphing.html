@@ -61,6 +61,17 @@
       });
     }
 
+    // Draw circles at the solution points for ax^2 + bx + c
+    function ax2_bx1_cx0_solutions(a, b, c) {
+      var sqrt_disc = Math.sqrt(b*b - 4.0*a*c);
+      var x1 = (-1.0*b + sqrt_disc) / (2.0*a);
+      var x2 = (-1.0*b - sqrt_disc) / (2.0*a);
+      var points = new Array();
+      points.push([x1, 0]);
+      points.push([x2, 0]);
+      return points;
+    }
+
     // Return points for a curve ax^2 + bx + c
     function ax2_bx1_cx0(a, b, c, xmin, xmax) {
       var points = new Array();
@@ -92,7 +103,8 @@
       $.plot($("#flot"), [
         { label: "a = " + a.toFixed(2), data: ax2_bx1_cx0(a, b, c, xmin, xmax) },
         { label: "b = " + b.toFixed(2), data: bx1_cx0(b, c, xmin, xmax) },
-        { label: "c = " + c.toFixed(2), data: cx0(c, xmin, xmax) }
+        { label: "c = " + c.toFixed(2), data: cx0(c, xmin, xmax) },
+        { label: "solutions", lines: { show: false }, points: { show: true }, data: ax2_bx1_cx0_solutions(a, b, c) }
       ], {
         xaxis: { min: xmin, max: xmax},
         yaxis: { min: ymin, max: ymax}
