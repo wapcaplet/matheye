@@ -107,7 +107,8 @@
         { label: "solutions", lines: { show: false }, points: { show: true }, data: ax2_bx1_cx0_solutions(a, b, c) }
       ], {
         xaxis: { min: xmin, max: xmax},
-        yaxis: { min: ymin, max: ymax}
+        yaxis: { min: ymin, max: ymax},
+        crossOrigin: true
       });
     }
 
@@ -122,5 +123,11 @@
   <script type="text/javascript" src="{{ url_for('static', filename='js/tangle/TangleKit/sprintf.js') }}"></script>
   <script type="text/javascript" src="{{ url_for('static', filename='js/tangle/TangleKit/BVTouchable.js') }}"></script>
   <script type="text/javascript" src="{{ url_for('static', filename='js/tangle/TangleKit/TangleKit.js') }}"></script>
+
+  <!-- Try out the origin-axis plugin -->
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.8.1.min.js"></script>
+    <script type="text/javascript" src="https://raw.github.com/flot/flot/master/jquery.flot.js"></script>
+    <script type="text/javascript" src="https://raw.github.com/flot/flot/master/jquery.flot.selection.js"></script>
+    <script type="text/javascript" src="https://raw.github.com/burlandm/Flot-Origin-Axis/master/jquery.flot.originaxis.js"></script>
 {% endblock %}
 
