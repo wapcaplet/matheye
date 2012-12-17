@@ -39,9 +39,9 @@
     // Redraw the graph. This could probably done more efficiently.
     function replot(m, b, xmin, xmax, ymin, ymax) {
       $.plot($("#flot"), [
-        { label: "slope = " + m.toFixed(2), data: linear(m, b, xmin, xmax) },
-        { label: "intercept = " + b.toFixed(2), data: horizontal(b, xmin, xmax) },
-        { label: "solution", lines: { show: false }, points: { show: true }, data: linear_solution(m, b) }
+        linear_series(m, b, xmin, xmax),
+        constant_series(b, xmin, xmax),
+        linear_solution(m, b)
       ], {
         xaxis: { min: xmin, max: xmax},
         yaxis: { min: ymin, max: ymax},

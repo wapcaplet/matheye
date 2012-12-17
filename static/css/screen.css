@@ -114,3 +114,11 @@ td:hover {
 #flot {
   float: left;
 }
+
+#notes {
+  clear: both;
+}
+
+.legendLabel {
+  text-align: right;
+}

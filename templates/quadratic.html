@@ -10,6 +10,32 @@
   <div id="flot" style="width:500px; height:500px;"></div>
   <div id="flot_legend"></div>
 
+  <div id="notes"</div>
+    <h2>Observations</h2>
+    <ul>
+      <li>
+      When <em>a</em> &gt; 0, the curve points up.
+      </li>
+
+      <li>
+      When <em>a</em> &lt; 0, the curve points down.
+      </li>
+
+      <li>
+      When <em>a</em> = 0, we get a straight line.
+      </li>
+
+      <li>
+      When <em>b</em> = 0 and <em>c</em> = 0, the only solution is at <em>x</em> = 0.
+      </li>
+
+      <li>
+      When <em>c</em> = 0 and <em>b</em> &ne; 0, there are 2 solutions,
+      and one of them is always at <em>x</em> = 0.
+      </li>
+    </ul>
+  </div>
+
   <script>
     // Set up all variables used in the tangle
     // TODO: Would be nice to set initial value here too
@@ -47,10 +73,10 @@
     // Redraw the graph. This could probably done more efficiently.
     function replot(a, b, c, xmin, xmax, ymin, ymax) {
       $.plot($("#flot"), [
-        { label: "a = " + a.toFixed(2), data: ax2_bx1_cx0(a, b, c, xmin, xmax) },
-        { label: "b = " + b.toFixed(2), data: linear(b, c, xmin, xmax) },
-        { label: "c = " + c.toFixed(2), data: horizontal(c, xmin, xmax) },
-        { label: "solutions", lines: { show: false }, points: { show: true }, data: ax2_bx1_cx0_solutions(a, b, c) }
+        quadratic_series(a, b, c, xmin, xmax),
+        linear_series(b, c, xmin, xmax),
+        constant_series(c, xmin, xmax),
+        quadratic_solutions(a, b, c)
       ], {
         xaxis: { min: xmin, max: xmax},
         yaxis: { min: ymin, max: ymax},
