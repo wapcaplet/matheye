@@ -24,9 +24,9 @@ def division():
 def multiples():
     return render_template('multiples.html')
 
-@app.route('/graphing')
-def graphing():
-    return render_template('graphing.html')
+@app.route('/quadratic')
+def quadratic():
+    return render_template('quadratic.html')
 
 if __name__ == '__main__':
     port = int(os.environ.get('PORT', 5000))

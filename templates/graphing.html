@@ -2,139 +2,10 @@
 {% block title %}Graphing{% endblock %}
 
 {% block content %}
-  <div id="quadratic">
-    <p>This is a simple example of a realtime graphing calculator, using
-    <a href="http://worrydream.com/Tangle/">Tangle</a> to adjust a parameter for a
-    <a href="http://www.flotcharts.org/">Flot</a> graph.
-    </p>
-
-    <p>The graph shows a plot of the quadratic equation
-    <span id="a"></span><em>x</em><sup>2</sup> +
-    <span id="b"></span><em>x</em> +
-    <span id="c"></span>.
-    Click and drag to change the formula.
-    </p>
-    <ul>
-      <li>Range (<em>x</em>): <span id="xmin"></span> to <span id="xmax"></span></li>
-      <li>Domain (<em>y</em>): <span id="ymin"></span> to <span id="ymax"></span></li>
-    </ul>
-
-  </div>
-  <div id="flot" style="width:600px; height:400px;"></div>
-
-  <p>In the most general example, an arbitrary <em>f(x)</em> function could be entered, then
-  each of its numeric constants could be adjusted to see their effect on the plot.
-  Most online graphing-calculator examples I've seen require (at minimum) that
-  you press Enter or click a button to redraw the graph. This would seem to be
-  a huge improvement over those.
-  </p>
-
   <script src="{{ url_for('static', filename='js/flot/jquery.flot.js') }}"></script>
-  <script>
-    /* Note: This example is quickly hacked together as a proof of concept;
-    all of this could be done in a more generic and flexible way.
-    */
-
-    // Initialize a tangle variable from an element with the given id.
-    function make_variable(id, min, max, step, format) {
-      var elem = $('#' + id);
-      elem.attr({
-        'class': 'TKAdjustableNumber',
-        'data-var': id,
-        'data-min': min,
-        'data-max': max
-      });
-      if (step) { elem.attr('data-step', step); }
-      if (format) { elem.attr('data-format', format); }
-    }
-
-    // Set up all variables used in the tangle
-    // TODO: Would be nice to set initial value here too
-    function setup_variables() {
-      make_variable('a', -2.0, 2.0, 0.01, '%.2f');
-      make_variable('b', -5.0, 5.0, 0.10, '%.1f');
-      make_variable('c', -10.0, 10.0, 0.10, '%.1f');
-      make_variable('xmin', -50, 0, 1);
-      make_variable('xmax', 0, 50, 1);
-      make_variable('ymin', -50, 0, 1);
-      make_variable('ymax', 0, 50, 1);
-    }
-
-    function setUpTangle() {
-      setup_variables();
-
-      var element = document.getElementById("quadratic");
-      var tangle = new Tangle(element, {
-        initialize: function() {
-          this.a = 0.2;
-          this.b = 1.0;
-          this.c = -5;
-          this.xmin = -20;
-          this.xmax = 30;
-          this.ymin = -20;
-          this.ymax = 20;
-        },
-        update: function() {
-          replot(this.a, this.b, this.c, this.xmin, this.xmax, this.ymin, this.ymax);
-        }
-      });
-    }
-
-    // Draw circles at the solution points for ax^2 + bx + c
-    function ax2_bx1_cx0_solutions(a, b, c) {
-      var sqrt_disc = Math.sqrt(b*b - 4.0*a*c);
-      var x1 = (-1.0*b + sqrt_disc) / (2.0*a);
-      var x2 = (-1.0*b - sqrt_disc) / (2.0*a);
-      var points = new Array();
-      points.push([x1, 0]);
-      points.push([x2, 0]);
-      return points;
-    }
-
-    // Return points for a curve ax^2 + bx + c
-    function ax2_bx1_cx0(a, b, c, xmin, xmax) {
-      var points = new Array();
-      for (var x = xmin*4; x<= xmax*4; x += 1) {
-        var xs = x*0.25; // Scaled down
-        points.push([xs, a*xs*xs + b*xs + c]);
-      }
-      return points
-    }
-
-    // Return points for a line with slope b
-    function bx1_cx0(b, c, xmin, xmax) {
-      var points = new Array();
-      points.push([xmin, b*xmin + c]);
-      points.push([xmax, b*xmax + c]);
-      return points
-    }
-
-    // Return points describing a horizontal line at y=c
-    function cx0(c, xmin, xmax) {
-      var points = new Array();
-      points.push([xmin, c]);
-      points.push([xmax, c]);
-      return points;
-    }
-
-    // Redraw the graph. This could probably done more efficiently.
-    function replot(a, b, c, xmin, xmax, ymin, ymax) {
-      $.plot($("#flot"), [
-        { label: "a = " + a.toFixed(2), data: ax2_bx1_cx0(a, b, c, xmin, xmax) },
-        { label: "b = " + b.toFixed(2), data: bx1_cx0(b, c, xmin, xmax) },
-        { label: "c = " + c.toFixed(2), data: cx0(c, xmin, xmax) },
-        { label: "solutions", lines: { show: false }, points: { show: true }, data: ax2_bx1_cx0_solutions(a, b, c) }
-      ], {
-        xaxis: { min: xmin, max: xmax},
-        yaxis: { min: ymin, max: ymax},
-        crossOrigin: true
-      });
-    }
-
-    $(document).ready(function() {
-      setUpTangle();
-    });
-  </script>
+  <script src="{{ url_for('static', filename='js/tangly.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/graphing.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/flot/jquery.flot.js') }}"></script>
 
   <link rel="stylesheet" href="{{ url_for('static', filename='js/tangle/TangleKit/TangleKit.css') }}" type="text/css">
   <script type="text/javascript" src="{{ url_for('static', filename='js/tangle/Tangle.js') }}"></script>
@@ -144,9 +15,9 @@
   <script type="text/javascript" src="{{ url_for('static', filename='js/tangle/TangleKit/TangleKit.js') }}"></script>
 
   <!-- Try out the origin-axis plugin -->
-    <script type="text/javascript" src="http://code.jquery.com/jquery-1.8.1.min.js"></script>
-    <script type="text/javascript" src="https://raw.github.com/flot/flot/master/jquery.flot.js"></script>
-    <script type="text/javascript" src="https://raw.github.com/flot/flot/master/jquery.flot.selection.js"></script>
-    <script type="text/javascript" src="https://raw.github.com/burlandm/Flot-Origin-Axis/master/jquery.flot.originaxis.js"></script>
+  <script type="text/javascript" src="http://code.jquery.com/jquery-1.8.1.min.js"></script>
+  <script type="text/javascript" src="https://raw.github.com/flot/flot/master/jquery.flot.js"></script>
+  <script type="text/javascript" src="https://raw.github.com/flot/flot/master/jquery.flot.selection.js"></script>
+  <script type="text/javascript" src="https://raw.github.com/burlandm/Flot-Origin-Axis/master/jquery.flot.originaxis.js"></script>
 {% endblock %}
 

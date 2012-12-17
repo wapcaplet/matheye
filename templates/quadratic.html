@@ -1,0 +1,69 @@
+{% extends "graphing.html" %}
+{% block title %}Quadratic Equation{% endblock %}
+
+{% block content %}
+  <div id="quadratic" class="equation">
+    <span id="a"></span><em>x</em><sup>2</sup> +
+    <span id="b"></span><em>x</em> +
+    <span id="c"></span>
+  </div>
+  <div id="flot" style="width:600px; height:400px;"></div>
+  <div id="flot_legend"></div>
+
+  <script>
+    // Set up all variables used in the tangle
+    // TODO: Would be nice to set initial value here too
+    function setup_variables() {
+      make_variable('a', -2.0, 2.0, 0.01, '%.2f');
+      make_variable('b', -5.0, 5.0, 0.10, '%.1f');
+      make_variable('c', -10.0, 10.0, 0.10, '%.1f');
+      // TODO: Generalize these
+      //make_variable('xmin', -50, 0, 1);
+      //make_variable('xmax', 0, 50, 1);
+      //make_variable('ymin', -50, 0, 1);
+      //make_variable('ymax', 0, 50, 1);
+    }
+
+    function setUpTangle() {
+      setup_variables();
+
+      var element = document.getElementById("quadratic");
+      var tangle = new Tangle(element, {
+        initialize: function() {
+          this.a = 0.2;
+          this.b = 1.0;
+          this.c = -5;
+          this.xmin = -20;
+          this.xmax = 20;
+          this.ymin = -20;
+          this.ymax = 20;
+        },
+        update: function() {
+          replot(this.a, this.b, this.c, this.xmin, this.xmax, this.ymin, this.ymax);
+        }
+      });
+    }
+
+    // Redraw the graph. This could probably done more efficiently.
+    function replot(a, b, c, xmin, xmax, ymin, ymax) {
+      $.plot($("#flot"), [
+        { label: "a = " + a.toFixed(2), data: ax2_bx1_cx0(a, b, c, xmin, xmax) },
+        { label: "b = " + b.toFixed(2), data: bx1_cx0(b, c, xmin, xmax) },
+        { label: "c = " + c.toFixed(2), data: cx0(c, xmin, xmax) },
+        { label: "solutions", lines: { show: false }, points: { show: true }, data: ax2_bx1_cx0_solutions(a, b, c) }
+      ], {
+        xaxis: { min: xmin, max: xmax},
+        yaxis: { min: ymin, max: ymax},
+        crossOrigin: true,
+        legend: { container: "#flot_legend" }
+      });
+    }
+
+    $(document).ready(function() {
+      setUpTangle();
+    });
+  </script>
+
+  {{ super() }}
+{% endblock %}
+
