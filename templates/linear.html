@@ -1,0 +1,60 @@
+{% extends "graphing.html" %}
+{% block title %}Linear Equation{% endblock %}
+
+{% block content %}
+  <div id="linear" class="equation">
+    <span id="m"></span><em>x</em> +
+    <span id="b"></span>
+  </div>
+  <div id="flot" style="width:600px; height:400px;"></div>
+  <div id="flot_legend"></div>
+
+  <script>
+    // Set up all variables used in the tangle
+    // TODO: Would be nice to set initial value here too
+    function setup_variables() {
+      make_variable('m', -5.0, 5.0, 0.10, '%.1f');
+      make_variable('b', -10.0, 10.0, 0.10, '%.1f');
+    }
+
+    function setUpTangle() {
+      setup_variables();
+
+      var element = document.getElementById("linear");
+      var tangle = new Tangle(element, {
+        initialize: function() {
+          this.m = 1.0;
+          this.b = -5;
+          this.xmin = -20;
+          this.xmax = 20;
+          this.ymin = -20;
+          this.ymax = 20;
+        },
+        update: function() {
+          replot(this.m, this.b, this.xmin, this.xmax, this.ymin, this.ymax);
+        }
+      });
+    }
+
+    // Redraw the graph. This could probably done more efficiently.
+    function replot(m, b, xmin, xmax, ymin, ymax) {
+      $.plot($("#flot"), [
+        { label: "slope = " + m.toFixed(2), data: linear(m, b, xmin, xmax) },
+        { label: "intercept = " + b.toFixed(2), data: horizontal(b, xmin, xmax) },
+        { label: "solution", lines: { show: false }, points: { show: true }, data: linear_solution(m, b) }
+      ], {
+        xaxis: { min: xmin, max: xmax},
+        yaxis: { min: ymin, max: ymax},
+        crossOrigin: true,
+        legend: { container: "#flot_legend" }
+      });
+    }
+
+    $(document).ready(function() {
+      setUpTangle();
+    });
+  </script>
+
+  {{ super() }}
+{% endblock %}
+

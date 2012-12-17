@@ -48,8 +48,8 @@
     function replot(a, b, c, xmin, xmax, ymin, ymax) {
       $.plot($("#flot"), [
         { label: "a = " + a.toFixed(2), data: ax2_bx1_cx0(a, b, c, xmin, xmax) },
-        { label: "b = " + b.toFixed(2), data: bx1_cx0(b, c, xmin, xmax) },
-        { label: "c = " + c.toFixed(2), data: cx0(c, xmin, xmax) },
+        { label: "b = " + b.toFixed(2), data: linear(b, c, xmin, xmax) },
+        { label: "c = " + c.toFixed(2), data: horizontal(c, xmin, xmax) },
         { label: "solutions", lines: { show: false }, points: { show: true }, data: ax2_bx1_cx0_solutions(a, b, c) }
       ], {
         xaxis: { min: xmin, max: xmax},

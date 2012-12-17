@@ -28,6 +28,10 @@ def multiples():
 def quadratic():
     return render_template('quadratic.html')
 
+@app.route('/linear')
+def linear():
+    return render_template('linear.html')
+
 if __name__ == '__main__':
     port = int(os.environ.get('PORT', 5000))
     app.debug = True

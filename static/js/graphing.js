@@ -1,6 +1,6 @@
 // Graphing support
 
-// Draw circles at the solution points for ax^2 + bx + c
+// Return solution points for y = ax^2 + bx + c
 function ax2_bx1_cx0_solutions(a, b, c) {
   var sqrt_disc = Math.sqrt(b*b - 4.0*a*c);
   var x1 = (-1.0*b + sqrt_disc) / (2.0*a);
@@ -8,6 +8,14 @@ function ax2_bx1_cx0_solutions(a, b, c) {
   var points = new Array();
   points.push([x1, 0]);
   points.push([x2, 0]);
+  return points;
+}
+
+// Return solution points for y = mx + b
+function linear_solution(m, b) {
+  var points = new Array();
+  var x = (-1.0*b) / m;
+  points.push([x, 0]);
   return points;
 }
 
@@ -21,16 +29,16 @@ function ax2_bx1_cx0(a, b, c, xmin, xmax) {
   return points
 }
 
-// Return points for a line with slope b
-function bx1_cx0(b, c, xmin, xmax) {
+// Return points for a line in slope-intercept form (y = mx + b)
+function linear(m, b, xmin, xmax) {
   var points = new Array();
-  points.push([xmin, b*xmin + c]);
-  points.push([xmax, b*xmax + c]);
+  points.push([xmin, m*xmin + b]);
+  points.push([xmax, m*xmax + b]);
   return points
 }
 
 // Return points describing a horizontal line at y=c
-function cx0(c, xmin, xmax) {
+function horizontal(c, xmin, xmax) {
   var points = new Array();
   points.push([xmin, c]);
   points.push([xmax, c]);
