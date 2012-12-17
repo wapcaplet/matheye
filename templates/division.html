@@ -2,15 +2,34 @@
 {% block title %}Division{% endblock %}
 
 {% block content %}
-  <p>Work in progress...</p>
-  <div id="division"></div>
+  <div id="division" class="equation">
+    <span id="n"></span> &div; <span id="d"></span>
+  </div>
+  <div id="show_division"></div>
 
   <script src="{{ url_for('static', filename='js/division.js') }}"></script>
   <script>
+    function setup_variables() {
+      make_variable('n', 0, 50, 1);
+      make_variable('d', 1, 50, 1);
+    }
+    function setUpTangle() {
+      setup_variables();
+
+      var element = document.getElementById("division");
+      var tangle = new Tangle(element, {
+        initialize: function() {
+          this.n = 10;
+          this.d = 3;
+        },
+        update: function() {
+          $('#show_division').html(show_division(this.n, this.d));
+        }
+      });
+    }
+
     $(document).ready(function() {
-      $('#division').append(show_division(9, 4));
-      $('#division').append(show_division(13, 5));
-      $('#division').append(show_division(17, 3));
+      setUpTangle();
     });
   </script>
 {% endblock %}

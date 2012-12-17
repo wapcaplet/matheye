@@ -59,7 +59,7 @@ function append_cells(tr, count, first_content, last_content, cls) {
   for (var c = 1; c <= count; c++) {
     var td = elem('td').addClass(cls);
     if (c == 1)     { td.html(first_content); }
-    if (c == count) { td.html(last_content); }
+    else if (c == count) { td.html(last_content); }
     tr.append(td);
   }
 }

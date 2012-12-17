@@ -122,3 +122,10 @@ td:hover {
 .legendLabel {
   text-align: right;
 }
+
+table.squares th,
+table.squares td {
+  width: 30px;
+  height: 30px;
+}
+
