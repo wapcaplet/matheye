@@ -37,6 +37,22 @@ subtraction, multiplication, division with remainders, prime numbers, factors,
 and multiples. Longer-term, it might expand to include fractions, functions,
 trigonometry, algebra, and calculus.
 
+Some design principles:
+
+- Show, don't tell: Use words minimally. Words are language-specific, and
+  mathematics is the language of focus here. Pop-ups or sidebars with
+  explanations, terminology and so forth might be OK, but they should be
+  nonessential.
+
+- Illustrate clearly: Strong focus on legibility, good color choices, use of
+  whitespace, appropriate font sizes and styles. Avoid eye candy, animation,
+  embellishments, and other distractions unless they directly contribute to
+  comprehension.
+
+- Usability: Equally usable with a mouse or touch-screen. The UI must be
+  discoverable, responsive, clean and compact. Navigation should encourage
+  exploration, with many paths to each destination.
+
 
 Implementation
 --------------
@@ -66,137 +82,16 @@ Then load http://localhost:5000/ in your browser.
 .. _virtualenvwrapper: http://www.doughellmann.com/projects/virtualenvwrapper/
 
 
+References
+----------
 
-Ideas
------
+- The `Math is Fun`_ website includes some examples that are very similar to
+  ones I've independently thought of for Matheye, including a `multiplication
+  table`_ and `quadratic equation graph`_.
 
-Addition and subtraction
-
-- Numbers 1 to 10 and beyond down the left side
-- Hover over row N, and move mouse to the right to see different ways of adding
-  or subtracting numbers. Draw boxes so quantities can be visualized, and
-  color-code them for the component numbers
-
-Addition::
-
-      1
-      2
-      3
-    > 4 = [1] + [3] [_] [_]
-      5    ^
-      6
-
-      1
-      2
-      3
-    > 4 = [_] [2] + [2] [_]
-      5        ^
-      6
-
-      1
-      2
-      3
-    > 4 = [_] [_] [_] [4] + 0
-      5                ^
-      6
-
-Subtraction::
-
-      1
-      2
-      3
-    > 4 - [1] = [3] [_] [_]
-      5    ^
-      6
-
-      1
-      2
-      3
-    > 4 - [_] [2] = [2] [_]
-      5        ^
-      6
-
-      1
-      2
-      3
-    > 4 - [_] [_] [_] [4] = 0
-      5                ^
-      6
-
-Division:
-
-The table approach could still be used, but the cell area would be devoted to
-showing the quotient and remainder. First, hover over a number in the left
-column (the dividend), then slide across the row to pick a divisor. The quotient
-is shown as an m x n grid of boxes, with additional boxes for any remainder::
-
-      1
-      2
-      3
-      4    v
-    > 5 / [1]
-          [_]
-          [_]
-          [_]
-          [_] = 5
-                R
-                0
-
-      1
-      2
-      3
-      4        v
-    > 5 / [_] [2]
-          [_] [_] = 2
-                    R
-              [_]   1
-
-      1
-      2
-      3
-      4            v
-    > 5 / [_] [_] [3] = 1
-                        R
-              [_] [_]   2
-
-      1
-      2
-      3
-      4                v
-    > 5 / [_] [_] [_] [4] = 1
-                            R
-                      [_]   1
-
-      1
-      2
-      3
-      4                    v
-    > 5 / [_] [_] [_] [_] [5] = 1
-                                R
-                                0
-
-      1
-      2
-      3
-      4
-      5        v
-    > 6 / [_] [2]
-          [_] [_]
-          [_] [_] = 3
-                    R
-                    0
-
-      1
-      2
-      3
-      4
-      5
-      6        v
-    > 7 / [_] [2]
-          [_] [_]
-          [_] [_] = 3
-                    R
-              [_]   1
+.. _Math is Fun: http://www.mathisfun.com/
+.. _multiplication table: http://www.mathsisfun.com/tables.html
+.. _quadratic equation graph: http://www.mathsisfun.com/algebra/quadratic-equation-graph.html
 
 Future ideas
 ------------
@@ -248,6 +143,7 @@ Future ideas
 
     x = 7
     5*7 = 35        Color-code green and/or make bold when a solution is found
+
 
 
 License
