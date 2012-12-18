@@ -6,5 +6,12 @@
   <div id="equations"></div>
 
   <script src="{{ url_for('static', filename='js/multiply.js') }}"></script>
+  <script>
+    $(document).ready(function() {
+      table = multiplication_table();
+      $('div#multiplication').html(table);
+    });
+  </script>
+
 {% endblock %}
 

@@ -17,7 +17,7 @@ function number_cell(number) {
 
 // Return a table containing the numbers 1-100
 function hundred_table() {
-  var table = elem('table');
+  var table = elem('table').addClass('point');
   for (var a=0; a<10; a++) {
     var tr = elem('tr');
     for (var b=1; b<=10; b++) {
@@ -37,9 +37,4 @@ function highlight_multiples(divisor) {
     }
   });
 }
-
-$(document).ready(function() {
-  table = hundred_table();
-  $('div#multiples').html(table);
-});
 

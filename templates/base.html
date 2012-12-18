@@ -23,11 +23,17 @@
     {% endblock %}
   </head>
   <body>
-    {% block content %}{% endblock %}
-
-    <div id="footer">
-      <a href="https://github.com/wapcaplet/matheye">Source code on github</a>
+    <div id="header">
+      <a href="/">Home</a>
+      &middot; <a href="/about">About</a>
+      &middot; <a href="https://github.com/wapcaplet/matheye">Source</a>
+      &middot; <a href="https://github.com/wapcaplet/matheye/issues">Issues</a>
     </div>
+
+    <div id="content">
+      {% block content %}{% endblock %}
+    </div>
+
   </body>
 </html>
 

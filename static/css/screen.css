@@ -1,33 +1,42 @@
 body {
   font-size: 1.2em;
 }
+/* Generic tables */
 table {
   border: none;
   border-spacing: 4px;
   border-collapse: separate;
-}
-th {
-  background: #ccf;
-}
-#multiplication td {
-  color: #aaa;
 }
 th, td {
   padding: 10px;
   text-align: center;
   border: 1px solid black;
 }
-td:hover {
-  cursor: pointer;
-}
-.highlight {
+
+td.highlight {
   background: #ff8;
 }
-.selected {
+
+th.selected, td.selected {
   background: #8f8;
   color: black !important;
   font-weight: bold;
 }
+table th {
+  background: #ccf;
+}
+tr.remainder td {
+  font-weight: bold;
+}
+
+/* Multiplication tables */
+table.point td:hover {
+  cursor: pointer;
+}
+#multiplication table td {
+  color: #aaa;
+}
+
 /* TODO: Make these divs more generic */
 #multiplication,
 #multiples {
@@ -103,12 +112,31 @@ td:hover {
   background: #9e9;
 }
 
-#footer {
-  clear: both;
+#header {
+  border-bottom: 1px solid #777;
+  margin-bottom: 1em;
+  padding: 2px 6px;
+  font-size: 0.8em;
+  color: #777;
+}
+
+#header a {
+  text-decoration: none;
+  color: #777;
+}
+
+#header a:hover {
+  text-decoration: underline;
+}
+
+#content {
+  margin-top: 2em;
 }
 
 .equation {
   margin: 1em 3em;
+  font-size: 1.5em;
+  font-weight: bold;
 }
 
 #flot {
@@ -127,5 +155,9 @@ table.squares th,
 table.squares td {
   width: 30px;
   height: 30px;
+}
+
+table.squares td {
+  background: #ff8;
 }
 

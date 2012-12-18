@@ -24,9 +24,9 @@ function show_division(numerator, denominator) {
 
   // One more row for remainder, if there is one
   if (remainder > 0) {
-    var tr = elem('tr');
+    var tr = elem('tr').addClass('remainder');
     tr.append(elem('th').html('R'));
-    append_cells(tr, remainder, remainder, '', 'remainder');
+    append_cells(tr, remainder, remainder);
     table.append(tr);
   }
 

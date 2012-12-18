@@ -66,7 +66,7 @@ function multiplication_header_row() {
 
 // Build and return a multiplication table
 function multiplication_table() {
-  var table = elem('table');
+  var table = elem('table').addClass('point');
   var tr = multiplication_header_row();
   table.append(tr);
   for (var a=1; a<=10; a++) {
@@ -91,9 +91,4 @@ function update_multiplication_equations(a, b) {
   clear_equations();
   $('#equations').append(ul);
 }
-
-$(document).ready(function() {
-  table = multiplication_table();
-  $('div#multiplication').html(table);
-});
 
