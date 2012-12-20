@@ -161,3 +161,38 @@ table.squares td {
   background: #ff8;
 }
 
+table.squares td.a {
+  background: #faa;
+}
+table.squares td.b {
+  background: #aaf;
+}
+table.squares td.zero {
+  background: transparent;
+  border: 1px solid transparent;;
+}
+
+
+ul.icons {
+  list-style: none;
+  padding: 0;
+}
+ul.icons li {
+  float: left;
+}
+ul.icons li a {
+  font-size: 3em;
+  font-weight: bold;
+  border: 1px solid grey;
+  border-radius: 12px;
+  -moz-border-radius: 12px;
+  -webkit-border-radius: 12px;
+  text-decoration: none;
+  padding: 4px 10px;
+  margin: 6px;
+  vertical-align: bottom;
+}
+ul.icons li a:hover {
+  box-shadow: 0 0 6px 6px #99f;
+}
+

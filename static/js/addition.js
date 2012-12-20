@@ -54,8 +54,25 @@ function show_sum(add_or_subtract, sum, term) {
 }
 
 // Show a visualization of addition
-function show_addition(sum, term) {
+function show_addition_old(sum, term) {
   return show_sum('add', sum, term);
+}
+
+// Show a visualization of a + b
+function show_addition(a, b) {
+  // TODO: Kinda messy... clean this up
+  var sum = a + b;
+  var table = elem('table').addClass('squares');
+  var tr = elem('tr');
+  if (a > 0) { append_cells(tr, a, '', a, 'a'); }
+  else       { tr.append(elem('td').addClass('zero').html('0')); }
+  if (b > 0) { append_cells(tr, b, '', b, 'b'); }
+  else       { tr.append(elem('td').addClass('zero').html('0')); }
+  table.append(tr);
+  sum_tr = elem('tr');
+  append_cells(sum_tr, sum, '', sum);
+  table.append(sum_tr);
+  return table;
 }
 
 // Show a visualization of subtraction

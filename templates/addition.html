@@ -2,71 +2,37 @@
 {% block title %}Add{% endblock %}
 
 {% block content %}
-  <p>Work in progress...</p>
-  <p>Visualize simple addition and subtraction (up to 10) using a row of boxes.
-  These would be interactive; mousing to the left and right would add/subtract
-  different values, showing that there are several different ways to add two
-  numbers to get the same sum.
-  <div id="addition"></div>
-
-  <p>Here's one possible way to visualize addition of multi-digit numbers. Continuing
-  with the box theme, separate columns could be shown for the hundreds, tens, ones etc.
-  They can be color-coded to indicate that the boxes have different values.
-  </p>
-  <div id="box_addition"></div>
-  <p>Provide a key and/or an interactive mechanism for combining boxes. For example:
-  </p>
-  <div id="box_key"></div>
-  <p>Allow the student to combine 10 "ones" boxes into a single "tens" box, and
-  ten "tens" boxes into a single "hundreds" box, thus visualizing how larger
-  numbers are added together with carrying. The reverse operation (splitting a
-  100 into 10 "tens", or a 10 into 10 "ones") represents "borrowing" when
-  doing subtraction.
-  </p>
-  <p>One cool thing about this approach is that the boxes don't have to be
-  arranged a certain way; they can be all mixed/moved around without changing
-  the total value represented. You can add many numbers together by just adding
-  all their hundreds/tens/ones boxes to one big pile, and combining them
-  together to get the sum.
-  </p>
-  <p>Another cool thing about this is that it would work with numbers that
-  aren't base-10. Binary would have boxes for 1, 2, 4, 8 etc.; hexadecimal
-  would have boxes for 1, 16, 256, 4096; even mixed-base numbers (such as
-  days/hours/minutes/seconds) could be visualized just as easily. Exchange 1
-  day for 24 hours, or 1 hour for 60 minutes and so on.
-  </p>
+  <div id="addition" class="equation">
+    <span id="a"></span> + <span id="b"></span> = <span data-var="sum"></span>
+  </div>
+  <div id="show_addition"></div>
 
   <script src="{{ url_for('static', filename='js/addition.js') }}"></script>
   <script>
+    function setup_variables() {
+      make_variable('a', 1, 20, 1);
+      make_variable('b', 0, 20, 1);
+    }
+    function setUpTangle() {
+      setup_variables();
+
+      var element = document.getElementById("addition");
+      var tangle = new Tangle(element, {
+        initialize: function() {
+          this.a = 3;
+          this.b = 2;
+          this.sum = this.a + this.b;
+        },
+        update: function() {
+          this.sum = this.a + this.b;
+          $('#show_addition').html(show_addition(this.a, this.b));
+        }
+      });
+    }
     $(document).ready(function() {
-      $('#addition').append(show_subtraction(7, 1));
-      $('#addition').append(show_subtraction(7, 2));
-      $('#addition').append(show_subtraction(7, 3));
-      $('#addition').append(show_subtraction(7, 4));
-      $('#addition').append(show_subtraction(7, 5));
-      $('#addition').append(show_subtraction(7, 6));
-
-      $('#addition').append(show_addition(7, 1));
-      $('#addition').append(show_addition(7, 2));
-      $('#addition').append(show_addition(7, 3));
-      $('#addition').append(show_addition(7, 4));
-      $('#addition').append(show_addition(7, 5));
-      $('#addition').append(show_addition(7, 6));
-
-      $('#box_addition').append(box_addition(327, 418));
-
-      var hundreds_to_tens = elem('p');
-      hundreds_to_tens.append(box('100', 'hundreds'));
-      hundreds_to_tens.append(" = ");
-      hundreds_to_tens.append(boxes(10, '10', 'tens'));
-      $('#box_key').append(hundreds_to_tens);
-
-      var tens_to_ones = elem('p');
-      tens_to_ones.append(box('10', 'tens'));
-      tens_to_ones.append(" = ");
-      tens_to_ones.append(boxes(10, '1', 'ones'));
-      $('#box_key').append(tens_to_ones);
+      setUpTangle();
     });
   </script>
+
 {% endblock %}
 
